@@ -30,17 +30,23 @@ export default function LoginPage() {
       });
 
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.message || "Login failed");
       }
 
       // Store the token in localStorage
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("accessToken", data.token);
       localStorage.setItem("userRole", data.role);
 
       // Navigate based on user role
-      navigate(`/${data.role.toLowerCase()}`);
+      if (data.role === "Recruiter") {
+        navigate("/recruiter-dashboard");
+      } else if (data.role === "applicant") {
+        navigate("/applicant-dashboard"); // if implemented
+      } else {
+        navigate("/not-authorized");
+      }
     } catch (err) {
       setError(err.message);
     } finally {

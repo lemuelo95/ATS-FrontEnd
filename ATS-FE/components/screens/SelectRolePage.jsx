@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormContainer from '../ui-components/FormContainer';
 import Button from '../ui-components/Button';
-import toast from 'react-hot-toast';
+import toast, {Toaster} from 'react-hot-toast';
 
 export default function SelectRolePage() {
   const [role, setRole] = useState("");
@@ -34,21 +34,56 @@ export default function SelectRolePage() {
           throw new Error(data.message || "Sign up failed");
         }
 
-        // Clear the stored sign-up data
         localStorage.removeItem("signUpData");
-        
         toast.success("Account created successfully! Please login to continue.");
-        navigate("/login");
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000); // Wait 3 seconds before navigating
       } catch (err) {
         toast.error(err.message);
       }
     } else {
-      // For HR/Recruiter, just navigate to company details
       navigate("/company-info");
     }
   };
 
+    //   if (role === "Applicant") {
+  //     try {
+  //       const API_URL = "https://applicant-tracking-system-backend-aqpr.onrender.com";
+  //       const signUpData = JSON.parse(localStorage.getItem("signUpData"));
+        
+  //       const response = await fetch(`${API_URL}/api/v1/auth/signup`, {
+  //         method: "POST",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify({
+  //           ...signUpData,
+  //           role: "Applicant"
+  //         }),
+  //       });
+
+  //       const data = await response.json();
+        
+  //       if (!response.ok) {
+  //         throw new Error(data.message || "Sign up failed");
+  //       }
+
+  //       // Clear the stored sign-up data
+  //       localStorage.removeItem("signUpData");
+        
+  //       toast.success("Account created successfully! Please login to continue.");
+  //       navigate("/login");
+  //     } catch (err) {
+  //       toast.error(err.message);
+  //     }
+  //   } else {
+  //     // For HR/Recruiter, just navigate to company details
+  //     navigate("/company-info");
+  //   }
+  // };
+
   return (
+    <>
+    {/* <Toaster position="top-center" reverseOrder={false} /> */}
           <FormContainer title="Choose your role">
             <div className="space-y-6">
               {["Applicant", "HR/Recruiter"].map((item) => (
@@ -85,5 +120,6 @@ export default function SelectRolePage() {
               Next
             </Button>
           </FormContainer>
+          </>
   );
 }

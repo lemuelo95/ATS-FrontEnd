@@ -39,7 +39,7 @@ export default function CompanyDetailsPage() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     ...signUpData,
-                    role: "HR/Recruiter",
+                    role: "Recruiter",
                     companyName,
                     companyEmail
                 }),
@@ -65,7 +65,7 @@ export default function CompanyDetailsPage() {
 
     return (
         <>
-            <Toaster position="top-center" reverseOrder={false} />
+            {/* <Toaster position="top-center" reverseOrder={false} /> */}
 
         
                 <FormContainer title="Fill HR Details">
