@@ -27,25 +27,27 @@ export default function LoginPage() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
-      });
 
+      });
+console.log(formData);
       const data = await response.json();
+      console.log(data);
 
       if (!response.ok) {
         throw new Error(data.message || "Login failed");
       }
 
       // Store the token in localStorage
-      localStorage.setItem("accessToken", data.token);
-      localStorage.setItem("userRole", data.role);
+      localStorage.setItem("accessToken", data.accessToken);
+      localStorage.setItem("userRole", data.data.role);
 
       // Navigate based on user role
-      if (data.role === "Recruiter") {
+      if (data.data.role === "Recruiter") {
         navigate("/recruiter-dashboard");
-      } else if (data.role === "applicant") {
+      } else if (data.data.role === "applicant") {
         navigate("/applicant-dashboard"); // if implemented
-      } else {
-        navigate("/not-authorized");
+       // } else {
+       //  navigate("/not-authorized");
       }
     } catch (err) {
       setError(err.message);

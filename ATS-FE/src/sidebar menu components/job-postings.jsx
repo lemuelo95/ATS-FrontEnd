@@ -10,8 +10,7 @@ export function JobPostings() {
     useEffect(() => {
         const fetchJobs = async () => {
             try {
-                const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODE4YjQxNTk5NzMwMDU3ZTI1OTgyZjUiLCJlbWFpbCI6ImhyQHJ5ZGVzeW5jLmNvbSIsInJvbGUiOiJSZWNydWl0ZXIiLCJpYXQiOjE3NDY3MDY1MDEsImV4cCI6MTc0NjcwNzQwMX0.RApz4u6GCXyFn0F6YjN8RQraFeuXvYdMVMZmkKxzCuk" // <-- Paste your JWT token here
-
+                const token = getItem("accessToken")
                 const response = await fetch(
                     "https://applicant-tracking-system-backend-aqpr.onrender.com/api/v1/jobs",
                     {

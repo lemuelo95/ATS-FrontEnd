@@ -34,7 +34,7 @@ const data = {
   navMain: [
     {
       title: "Overview",
-      url: "/",
+      url: "/recruiter-dashboard",
       icon: IconListDetails,
     },
     {
